@@ -132,5 +132,5 @@ STATICFILES_DIRS = (
 
 # 这个是默认设置，Django 默认会在 STATICFILES_DIRS中的文件夹 和 各app下的static文件夹中找文件
 # 注意有先后顺序，找到了就不再继续找了
-
-MEDIA_ROOT='/Users/xianchen/Documents/djangocode/ntools'
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT= os.path.join(BASE_DIR, "uploads")

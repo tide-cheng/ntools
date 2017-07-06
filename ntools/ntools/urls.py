@@ -19,4 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^ntools/', include('nconfig.urls')),
+    url(r'^uploads/configfiles/', include('nconfig.urls')),
+    url(r'^$', include('nconfig.urls')),
 ]

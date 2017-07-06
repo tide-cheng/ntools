@@ -16,9 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name='nconfig'
 urlpatterns = [
     url(r'^$', views.dashboard, name='dashboard'),
-    url(r'^(?P<filename>.*)/$', views.detail, name='detail')
-]
+    url(r'^configdb$', views.configdb, name='configdb'),
+    url(r'^updatehostname$', views.update_hostname, name='updatehostname'),
+    url(r'^hostname/(?P<filename>.*)/$', views.detail_hostname, name='detail_hostname'),
+    url(r'^(?P<filename>.*)/$', views.detail, name='detail'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

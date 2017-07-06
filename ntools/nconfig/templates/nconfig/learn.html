@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="http://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+
+    </script>
+    <title>Title</title>
+</head>
+<body>
+<form id="test-form" action="#" onsubmit="return false">
+    <p><label>Name: <input name="name"></label></p>
+    <p><label>Email: <input name="email"></label></p>
+    <p><label>Password: <input name="password" type="password"></label></p>
+    <p>Gender: <label><input name="gender" type="radio" value="m" checked> Male</label>
+                <label><input name="gender" type="radio" value="f"> Female</label></p>
+    <p><label>City: <select name="city">
+        <option value="BJ" selected>Beijing</option>
+        <option value="SH">Shanghai</option>
+        <option value="CD">Chengdu</option>
+        <option value="XM">Xiamen</option>
+    </select></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
+<script>
+    'use strict';
+    var json = null;
+    json = $('form').serialize();
+    console.log(json);
+    var arr =json.map(function () {
+        return this.name;
+    }).get();
+    console.log(arr);
+    var arr1 =json.map(function () {
+        return this.value;
+    }).get();
+    console.log(arr1);
+
+    var json = JSON.stringify(obj);
+    if (typeof(json) === 'string') {
+        alert(json);
+    }
+    else {
+        alert('json变量不是string!');
+        }
+</script>
+</body>
+</html>

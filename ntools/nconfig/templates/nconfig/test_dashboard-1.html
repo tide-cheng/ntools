@@ -1,0 +1,72 @@
+{% extends "nconfig/base.html" %}
+{% load static %}
+{% block head_extra %}
+	  <!-- Custom styles for this template -->
+    <link href="{% static "bootstrap-3.3.5/css/dashboard.css" %}" rel="stylesheet">
+    
+{% endblock head_extra %}
+
+{% block body_extra %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{% static "nconfig/images/db.png" %}" class="img-responsive">
+              <h4>配置数据库</h4>
+              <span class="text-muted"></span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <form method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <input type="file" id="file" name="file" multiple = "true" webkitdirectory="true" directory = "true">
+                <input type="submit" value="提交" />
+              </form>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">文件列表</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>文件名</th>
+                  <th>文件加入时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>001</td>
+                  <td>示例</td>
+                  <td>Aug. 18, 2016, 11:19 p.m.</td>
+                </tr>
+                {% if all_entries %}
+                    {% for entry in all_entries %}
+                <tr>
+                    <td id="rows"><a href="{% url 'nconfig:detail' entry.filename_text %}">{{ index }}</a></td>
+                    <td><a href="{% url 'nconfig:detail' entry.filename_text %}">{{ entry.filename_text }}</a></td>
+                    <td><a href="{% url 'nconfig:detail' entry.filename_text %}">{{ entry.fileadd_date }}</a></td>
+                </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>The DB is empty.</p>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+   
+
+{% endblock body_extra %}

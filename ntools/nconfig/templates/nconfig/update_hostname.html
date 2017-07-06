@@ -1,0 +1,45 @@
+{% extends "nconfig/base.html" %}
+{% load static %}
+{% block head_extra %}
+<!-- Custom styles for this template -->
+<!-- href="{% static "bootstrap-3.3.5/css/dashboard.css" %}" rel="stylesheet"> -->
+<link href="{% static 'bootstrap-3.3.5/css/dashboard.css' %}" rel="stylesheet">
+{% endblock head_extra %}
+
+{% block body_extra %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 class="sub-header">设备名数据库信息</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>文件名</th>
+                  <th>设备名</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if all_entries %}
+                    {% for entry in all_entries %}
+                <tr>
+                    <td id="rows"><a href="{% url 'nconfig:detail_hostname' entry.filename %}">{{ forloop.counter }}</a></td>
+                    <td><a href="{% url 'nconfig:detail_hostname' entry.filename %}">{{ entry.filename }}</a></td>
+                    <td><a href="{% url 'nconfig:detail_hostname' entry.filename %}">{{ entry.hostname }}</a></td>
+                </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>The DB is empty.</p>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ update_request_form }}
+                    <input type="submit" value="更新设备名数据库" />
+                </form>
+            </div>
+            <p>POST DATA IS: {{ data }}</p>
+        </div>
+{% endblock body_extra %}
